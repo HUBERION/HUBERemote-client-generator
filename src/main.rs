@@ -13,10 +13,21 @@ type AppError = (StatusCode, &'static str);
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new()
-        .route("/:id", get(download));
+    let _ = dotenv::dotenv();
 
-    let addr = SocketAddr::from(([0, 0, 0, 0], 1234));
+    let app = Router::new().route("/:id", get(download));
+
+    let port = std::env::var("PORT")
+        .unwrap_or_else(|_e| {
+            println!("No PORT-Environment-Variable found => Defaulting to 1234");
+            String::from("1234")
+        })
+        .parse().unwrap_or_else(|_e| {
+            println!("Invalid PORT-Environment-Variable found => Defaulting to 1234");
+            1234
+        });
+
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
 
     println!("Server listening on {addr}");
 

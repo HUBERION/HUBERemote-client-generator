@@ -1,3 +1,9 @@
+# Environment Variables
+
+| Variable | Description | Default |
+| -------- | ----------- | ------- |
+| PORT | The Port the Server is running on | 1234 |
+
 # Usage
 
 ```shell
@@ -8,7 +14,7 @@ git clone https://github.com/HUBERION/HUBERemote-client-generator
 cd HUBERemote-client-generator
 ```
 
-## Docker
+## With Docker
 
 ```shell
 # This will take some time
@@ -16,12 +22,5 @@ docker build -t huberemote/download -f Docker/Dockerfile .
 ```
 
 ```shell
-docker run -p 1234:1234 huberemote/download
-```
-
-## Cargo
-
-```shell
-# This will take some time
-cargo run --release
+docker run -p 1234:1234 -e PORT=1234 huberemote/download
 ```
