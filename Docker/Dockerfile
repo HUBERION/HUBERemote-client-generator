@@ -7,4 +7,6 @@ COPY . .
 
 RUN cargo install --path .
 
+COPY /bin/supporter.exe /bin/supporter.exe
+
 CMD ["hr-gen"]
