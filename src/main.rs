@@ -38,7 +38,9 @@ async fn main() {
 }
 
 async fn download(Path(id): Path<String>) -> Result<impl IntoResponse, AppError> {
-    let file = tokio::fs::File::open("bin/supporter.exe")
+    let path = std::path::Path::new("bin").join("supporter.exe");
+
+    let file = tokio::fs::File::open(path)
         .await.map_err(|_e| (StatusCode::INTERNAL_SERVER_ERROR, "Could not open supporter.exe"))?;
 
     let headers = [
